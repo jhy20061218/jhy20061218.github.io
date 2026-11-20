@@ -48,14 +48,14 @@ python -m http.server 5510
 
 ### 第 1 步：推到 GitHub
 
-1. 在 GitHub 新建一个仓库（例如 `my-website`）。学生包附带 GitHub Pro，仓库可以设为 Private，照样能开 Pages
+1. 仓库：[jhy20061218/jhy20061218.github.io](https://github.com/jhy20061218/jhy20061218.github.io)（公开仓库）
 2. 把这个文件夹推上去：
 
 ```bash
 git init -b main
 git add .
 git commit -m "first version"
-git remote add origin https://github.com/你的用户名/my-website.git
+git remote add origin https://github.com/jhy20061218/jhy20061218.github.io.git
 git push -u origin main
 ```
 
@@ -88,6 +88,16 @@ DNS 生效一般要几分钟到几小时。回到 Settings → Pages，等 DNS �
 GitHub 头像 → Settings → Pages → **Add a domain**，填 `jiahanyi1218.me`，按提示在 Namecheap 加一条 TXT 记录即可。
 
 > ⚠️ 学生包的 .me 域名通常**只免费一年**，到期前记得在 Namecheap 续费，否则网站会打不开。
+
+## 更新网站
+
+改完文件后运行下面三条命令，一两分钟后 https://jiahanyi1218.me 就会更新：
+
+```bash
+git add .
+git commit -m "写一句说明改了什么"
+git push
+```
 
 ## 写新文章
 
