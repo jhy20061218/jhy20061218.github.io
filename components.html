@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>组件库 · 贾涵翌</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <script>document.documentElement.classList.remove('no-js');try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+  <style>
+    code.cls { font-family: var(--font-mono); font-size: 12px; color: var(--color-accent); background: var(--color-accent-soft); padding: 2px 8px; border-radius: 6px; }
+    .demo-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+    .demo-row + .demo-row { margin-top: var(--space-5); }
+    .demo-label { width: 100%; font-size: var(--text-xs); color: var(--color-text-faint); font-family: var(--font-mono); }
+    .demo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: var(--space-5); }
+  </style>
+</head>
+<body>
+  <div class="bg-mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5M22 10v6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m6 4 14 8-14 8z"/></symbol>
+  </svg>
+
+  <main class="container post" style="max-width: var(--container)">
+    <div class="cluster" style="justify-content: space-between; margin-bottom: var(--space-8)">
+      <a class="link-back glass" href="index.html" style="margin:0"><svg class="icon icon--sm"><use href="#i-arrow-left"/></svg>返回主页</a>
+      <button class="btn btn--icon btn--glass btn--sm theme-toggle" id="themeBtn" type="button" aria-label="切换深浅色">
+        <svg class="icon icon--sm icon-sun"><use href="#i-sun"/></svg>
+        <svg class="icon icon--sm icon-moon"><use href="#i-moon"/></svg>
+      </button>
+    </div>
+
+    <header class="section-head">
+      <p class="eyebrow" data-reveal>Design System</p>
+      <h1 class="h2" data-reveal>组件库</h1>
+      <p class="section-head__desc" data-reveal>网站用到的所有设计变量和组件。变量在 <code class="cls">css/tokens.css</code>，组件在 <code class="cls">css/components.css</code>。命名规则：<code class="cls">.组件</code> <code class="cls">.组件__部件</code> <code class="cls">.组件--变体</code>。</p>
+    </header>
+
+    <!-- ===== 颜色 ===== -->
+    <section class="kit-section">
+      <h2 class="h3" data-reveal>颜色</h2>
+      <p class="muted" data-reveal>切换右上角深浅色，所有颜色会自动跟着变。</p>
+      <div class="kit-panel glass swatches" data-reveal>
+        <div><div class="swatch__color" style="background: var(--color-bg)"></div><div class="swatch__name">--color-bg</div></div>
+        <div><div class="swatch__color" style="background: var(--color-surface)"></div><div class="swatch__name">--color-surface</div></div>
+        <div><div class="swatch__color" style="background: var(--color-text)"></div><div class="swatch__name">--color-text</div></div>
+        <div><div class="swatch__color" style="background: var(--color-text-muted)"></div><div class="swatch__name">--color-text-muted</div></div>
+        <div><div class="swatch__color" style="background: var(--color-brand-1)"></div><div class="swatch__name">--color-brand-1</div></div>
+        <div><div class="swatch__color" style="background: var(--color-brand-2)"></div><div class="swatch__name">--color-brand-2</div></div>
+        <div><div class="swatch__color" style="background: var(--color-brand-3)"></div><div class="swatch__name">--color-brand-3</div></div>
+        <div><div class="swatch__color" style="background: var(--color-accent)"></div><div class="swatch__name">--color-accent</div></div>
+        <div><div class="swatch__color" style="background: var(--color-accent-soft)"></div><div class="swatch__name">--color-accent-soft</div></div>
+        <div><div class="swatch__color" style="background: var(--gradient-brand)"></div><div class="swatch__name">--gradient-brand</div></div>
+      </div>
+    </section>
+
+    <!-- ===== 材质 ===== -->
+    <section class="kit-section">
+      <h2 class="h3" data-reveal>材质与阴影</h2>
+      <p class="muted" data-reveal>毛玻璃 <code class="cls">.glass</code> 可以加在任何元素上；阴影分五级。</p>
+      <div class="demo-grid" data-reveal>
+        <div class="kit-panel glass"><code class="cls">.glass</code><p class="muted" style="margin-top:8px">半透明 + 背景模糊 + 顶部高光</p></div>
+        <div class="kit-panel glass glass--strong"><code class="cls">.glass--strong</code><p class="muted" style="margin-top:8px">更不透明，适合大段文字</p></div>
+      </div>
+      <div class="demo-grid" style="margin-top: var(--space-5)" data-reveal>
+        <div class="shadow-demo" style="box-shadow: var(--shadow-xs)">--shadow-xs</div>
+        <div class="shadow-demo" style="box-shadow: var(--shadow-sm)">--shadow-sm</div>
+        <div class="shadow-demo" style="box-shadow: var(--shadow-md)">--shadow-md</div>
+        <div class="shadow-demo" style="box-shadow: var(--shadow-lg)">--shadow-lg</div>
+        <div class="shadow-demo" style="box-shadow: var(--shadow-glow)">--shadow-glow</div>
+      </div>
+    </section>
+
+    <!-- ===== 圆角 ===== -->
+    <section class="kit-section">
+      <h2 class="h3" data-reveal>圆角</h2>
+      <p class="muted" data-reveal>四级圆角 + 胶囊。</p>
+      <div class="kit-panel glass demo-row" data-reveal>
+        <div><div class="radius-demo" style="border-radius: var(--radius-sm)"></div><div class="swatch__name">--radius-sm</div></div>
+        <div><div class="radius-demo" style="border-radius: var(--radius-md)"></div><div class="swatch__name">--radius-md</div></div>
+        <div><div class="radius-demo" style="border-radius: var(--radius-lg)"></div><div class="swatch__name">--radius-lg</div></div>
+        <div><div class="radius-demo" style="border-radius: var(--radius-xl)"></div><div class="swatch__name">--radius-xl</div></div>
+        <div><div class="radius-demo" style="border-radius: var(--radius-full)"></div><div class="swatch__name">--radius-full</div></div>
+      </div>
+    </section>
+
+    <!-- ===== 动效曲线 ===== -->
+    <section class="kit-section">
+      <h2 class="h3" data-reveal>动效曲线</h2>
+      <p class="muted" data-reveal>点“播放”对比三种曲线。弹性曲线用于按钮、卡片、导航指示块。</p>
+      <div class="kit-panel glass" data-reveal>
+        <div class="ease-demo" id="easeDemo">
+          <div class="ease-demo__row"><span>--ease-out</span><div class="ease-demo__track"><span class="ease-demo__dot" style="transition: transform 900ms var(--ease-out)"></span></div></div>
+          <div class="ease-demo__row"><span>--ease-spring</span><div class="ease-demo__track"><span class="ease-demo__dot" style="transition: transform 900ms var(--ease-spring)"></span></div></div>
+          <div class="ease-demo__row"><span>--ease-bounce</span><div class="ease-demo__track"><span class="ease-demo__dot" style="transition: transform 900ms var(--ease-bounce)"></span></div></div>
+        </div>
+        <div class="demo-row" style="margin-top: var(--space-6)">
+          <button class="btn btn--primary btn--sm" type="button" id="easePlay"><svg class="icon icon--sm"><use href="#i-play"/></svg>播放</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 按钮 ===== -->
+    <section class="kit-section">
+      <h2 class="h3" data-reveal>按钮 Button</h2>
+      <p class="muted" data-reveal>悬停有光泽扫过，点击有涟漪；加 <code class="cls">data-magnetic</code> 会被鼠标“吸”过去。</p>
+      <div class="kit-panel glass" data-reveal>
+        <div class="demo-row">
+          <span class="demo-label">变体</span>
+          <button class="btn btn--primary" data-magnetic>Primary <svg class="icon icon--sm icon--move"><use href="#i-arrow-right"/></svg></button>
+          <button class="btn" data-magnetic>Default</button>
+          <button class="btn btn--glass" data-magnetic>Glass</button>
+          <button class="btn btn--ghost">Ghost</button>
+          <button class="btn btn--icon btn--glass" aria-label="邮件"><svg class="icon"><use href="#i-mail"/></svg></button>
+        </div>
+        <div class="demo-row">
+          <span class="demo-label">尺寸 · btn--sm / 默认 / btn--lg</span>
+          <button class="btn btn--primary btn--sm">Small</button>
+          <button class="btn btn--primary">Medium</button>
+          <button class="btn btn--primary btn--lg">Large</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 标签 ===== -->
+    <section class="kit-section">
+      <h2 class="h3" data-reveal>徽标 · 标签</h2>
+      <p class="muted" data-reveal><code class="cls">.badge</code> 状态（带呼吸圆点），<code class="cls">.chip</code> 可悬停标签，<code class="cls">.tag</code> 小标签，<code class="cls">.eyebrow</code> 小标题。</p>
+      <div class="kit-panel glass" data-reveal>
+        <div class="demo-row"><span class="badge glass"><i class="badge__dot"></i>台湾大学 · 在读</span><p class="eyebrow">Eyebrow</p></div>
+        <div class="demo-row"><span class="chip">C 语言</span><span class="chip">Python</span><span class="chip">Three.js</span></div>
+        <div class="demo-row"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      </div>
+    </section>
+
+    <!-- ===== 卡片 ===== -->
+    <section class="kit-section">
+      <h2 class="h3" data-reveal>卡片 Card</h2>
+      <p class="muted" data-reveal><code class="cls">.card.card--interactive.glass</code> + <code class="cls">data-tilt</code>：跟随鼠标 3D 倾斜，带追光。</p>
+      <div class="demo-grid">
+        <article class="card card--interactive glass" data-reveal data-tilt>
+          <div class="card__top"><span class="card__index">01</span><span class="card__arrow"><svg class="icon icon--sm"><use href="#i-arrow-up-right"/></svg></span></div>
+          <h3 class="h3 card__title">卡片标题</h3>
+          <p class="card__desc">一句话描述。鼠标移上去试试。</p>
+          <div class="card__tags"><span class="tag">标签</span><span class="tag">标签</span></div>
+        </article>
+        <article class="card glass" data-reveal>
+          <h3 class="h3">静态卡片</h3>
+          <p class="card__desc">只用 <code class="cls">.card.glass</code>，没有交互。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== 列表 / 信息条 ===== -->
+    <section class="kit-section">
+      <h2 class="h3" data-reveal>列表 · 信息条</h2>
+      <p class="muted" data-reveal><code class="cls">.list</code> + <code class="cls">.list-item</code>，以及 <code class="cls">.info-item</code>。</p>
+      <ul class="list glass" data-reveal>
+        <li><a class="list-item" href="#"><time class="list-item__meta">2026-11-17</time><span class="list-item__title">列表项标题</span><svg class="icon"><use href="#i-arrow-right"/></svg></a></li>
+        <li><a class="list-item" href="#"><time class="list-item__meta">2026-11-16</time><span class="list-item__title">另一条列表项</span><svg class="icon"><use href="#i-arrow-right"/></svg></a></li>
+      </ul>
+      <div class="kit-panel glass" style="margin-top: var(--space-5); padding: var(--space-2)" data-reveal>
+        <div class="info-item">
+          <span class="info-item__icon"><svg class="icon"><use href="#i-cap"/></svg></span>
+          <div><span class="info-item__label">标签</span><span class="info-item__value">内容</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 正文 ===== -->
+    <section class="kit-section">
+      <h2 class="h3" data-reveal>正文 Prose</h2>
+      <p class="muted" data-reveal>文章、项目详情的排版。</p>
+      <article class="prose glass" data-reveal>
+        <p>普通段落，带 <code>行内代码</code>。</p>
+        <h3>小标题</h3>
+        <ul><li>列表项一</li><li>列表项二</li></ul>
+        <blockquote>引用文字。</blockquote>
+      </article>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      var demo = document.getElementById('easeDemo');
+      var play = document.getElementById('easePlay');
+      if (!demo || !play) return;
+      function measure() {
+        var track = demo.querySelector('.ease-demo__track');
+        demo.style.setProperty('--track-w', track.clientWidth + 'px');
+      }
+      measure(); addEventListener('resize', measure);
+      play.addEventListener('click', function () { measure(); demo.classList.toggle('is-play'); });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+/* =========================================================
+   Layout —— 各页面的排布（只做布局，外观交给组件）
+   ========================================================= */
+
+/* ---------- 视图切换 ---------- */
+.view { padding: clamp(48px, 9vh, 96px) 0 var(--space-20); }
+.view[hidden] { display: none; }
+
+/* ---------- 首页：左文字 + 右 3D ---------- */
+.home {
+  min-height: calc(100vh - 180px); min-height: calc(100dvh - 180px);
+  display: flex; flex-direction: column; justify-content: center;
+  padding-top: var(--space-8); padding-bottom: var(--space-12);
+}
+.home__content { max-width: 600px; }
+.home__content > .badge { margin-bottom: var(--space-6); }
+.home__title { margin-bottom: var(--space-5); }
+.home__actions { margin-top: var(--space-10); }
+.home__hint {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  margin-top: var(--space-12); font-size: var(--text-xs); color: var(--color-text-faint);
+  font-family: var(--font-mono); letter-spacing: .08em;
+}
+.home__hint i {
+  width: 16px; height: 24px; border: 1.5px solid currentColor; border-radius: 10px; position: relative;
+}
+.home__hint i::after {
+  content: ""; position: absolute; left: 50%; top: 5px; width: 2px; height: 5px; margin-left: -1px;
+  border-radius: 2px; background: currentColor; animation: hint 1.8s var(--ease-in-out) infinite;
+}
+html:not(.has-webgl) .home__hint { display: none; }
+@keyframes hint { 50% { transform: translateY(6px); opacity: .3; } }
+
+/* ---------- 关于 ---------- */
+.about { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-6); align-items: start; }
+.about__text p { font-size: var(--text-md); }
+.about__text p + p { margin-top: var(--space-4); }
+.about__facts { display: grid; gap: var(--space-2); margin-top: var(--space-8); padding: var(--space-2); border-radius: var(--radius-lg); }
+.about__skills { padding: var(--space-8); border-radius: var(--radius-lg); }
+.about__skills .eyebrow { margin-bottom: var(--space-5); }
+
+/* ---------- 联系 ---------- */
+.contact {
+  max-width: 660px; margin-inline: auto; text-align: center;
+  padding: clamp(40px, 7vw, 68px) var(--space-6); border-radius: var(--radius-xl);
+}
+.contact__icon {
+  display: grid; place-items: center; width: 64px; height: 64px; margin: 0 auto var(--space-6);
+  border-radius: 20px; background: var(--gradient-brand); color: #fff; box-shadow: var(--shadow-glow);
+  animation: float 5s var(--ease-in-out) infinite;
+}
+@keyframes float { 50% { transform: translateY(-6px) rotate(-3deg); } }
+.contact .eyebrow { margin-bottom: var(--space-3); }
+.contact__desc { margin-top: var(--space-3); color: var(--color-text-muted); }
+.contact__email {
+  display: inline-block; margin-top: var(--space-6); padding: 10px 18px; border-radius: var(--radius-md);
+  font-family: var(--font-mono); font-size: clamp(15px, 2.4vw, 18px); background: var(--color-hover); word-break: break-all;
+}
+.contact .cluster { justify-content: center; margin-top: var(--space-6); }
+
+/* ---------- 详情页 / 文章页 ---------- */
+.detail .section-head .cluster { margin-top: var(--space-4); --cluster-gap: 6px; }
+.post { max-width: 800px; padding: var(--space-12) 0 var(--space-20); }
+.post__meta { margin-top: var(--space-3); font-family: var(--font-mono); font-size: 13px; color: var(--color-text-faint); }
+
+/* ---------- 组件库页面 ---------- */
+.kit-section { margin-bottom: var(--space-16); }
+.kit-section > .h3 { margin-bottom: var(--space-2); }
+.kit-section > .muted { margin-bottom: var(--space-6); font-size: var(--text-sm); }
+.kit-panel { padding: var(--space-8); border-radius: var(--radius-lg); }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: var(--space-4); }
+.swatch__color { height: 72px; border-radius: var(--radius-md); border: 1px solid var(--color-border); box-shadow: var(--shadow-xs); }
+.swatch__name { margin-top: var(--space-2); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-muted); }
+.shadow-demo { height: 90px; border-radius: var(--radius-md); background: var(--color-surface); display: grid; place-items: center; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-muted); }
+.ease-demo { display: grid; gap: var(--space-4); }
+.ease-demo__row { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: var(--space-4); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-muted); }
+.ease-demo__track { height: 36px; border-radius: var(--radius-full); background: var(--color-hover); position: relative; }
+.ease-demo__dot { position: absolute; left: 4px; top: 4px; width: 28px; height: 28px; border-radius: 50%; background: var(--gradient-brand); box-shadow: var(--shadow-glow); }
+.ease-demo.is-play .ease-demo__dot { transform: translateX(calc(var(--track-w, 300px) - 36px)); }
+.radius-demo { width: 72px; height: 72px; background: var(--color-accent-soft); border: 1.5px solid var(--color-accent); }
+
+/* ---------- 手机适配 ---------- */
+@media (max-width: 860px) {
+  .about { grid-template-columns: 1fr; }
+}
+/* 竖屏或窄屏：3D 物体在上方，文字在下方（断点与 js/scene.js 保持一致） */
+@media (max-aspect-ratio: 1/1), (max-width: 760px) {
+  .home { justify-content: flex-end; min-height: calc(100vh - 165px); min-height: calc(100dvh - 165px); padding-bottom: var(--space-6); }
+  .home__hint { display: none; }
+  .home__actions { margin-top: var(--space-8); }
+}

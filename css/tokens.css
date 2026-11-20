@@ -1,0 +1,147 @@
+/* =========================================================
+   Design Tokens —— 整个网站的设计变量
+   所有组件只引用这里的变量；改这里 = 改全站
+   ========================================================= */
+:root {
+  /* ---- 颜色：基础 ---- */
+  --color-bg:            #f6f6fa;
+  --color-surface:       #ffffff;
+  --color-text:          #15151c;
+  --color-text-muted:    #62637a;
+  --color-text-faint:    #6e6f86;  /* ≥4.5:1 对比度（WCAG AA） */
+  --color-border:        rgba(20, 20, 50, .08);
+  --color-hover:         rgba(20, 20, 50, .05);
+
+  /* ---- 颜色：品牌 ---- */
+  --color-brand-1:       #4f46e5;
+  --color-brand-2:       #8b5cf6;
+  --color-brand-3:       #ec4899;
+  --color-accent:        #5048e5;
+  --color-accent-soft:   rgba(80, 72, 229, .10);
+  --color-on-accent:     #ffffff;
+  --color-success:       #22c55e;
+  --gradient-brand:      linear-gradient(120deg, var(--color-brand-1), var(--color-brand-2) 50%, var(--color-brand-3));
+
+  /* ---- 材质：毛玻璃 ---- */
+  --glass-bg:            rgba(255, 255, 255, .55);
+  --glass-bg-strong:     rgba(255, 255, 255, .78);
+  --glass-border:        rgba(255, 255, 255, .7);
+  --glass-highlight:     inset 0 1px 0 rgba(255, 255, 255, .9);
+  --glass-blur:          blur(22px) saturate(180%);
+
+  /* ---- 材质：渐变网格 & 颗粒 ---- */
+  --mesh-1:              rgba(99, 102, 241, .30);
+  --mesh-2:              rgba(236, 72, 153, .20);
+  --mesh-3:              rgba(56, 189, 248, .22);
+  --mesh-4:              rgba(168, 85, 247, .20);
+  --grain-opacity:       .055;
+
+  /* ---- 阴影：柔和、分层 ---- */
+  --shadow-xs:  0 1px 2px rgba(20, 20, 50, .05);
+  --shadow-sm:  0 1px 2px rgba(20, 20, 50, .04), 0 4px 12px -2px rgba(20, 20, 50, .06);
+  --shadow-md:  0 2px 4px rgba(20, 20, 50, .03), 0 12px 32px -8px rgba(20, 20, 50, .12);
+  --shadow-lg:  0 4px 8px rgba(20, 20, 50, .03), 0 28px 60px -16px rgba(60, 50, 160, .25);
+  --shadow-glow: 0 10px 30px -6px rgba(99, 80, 240, .45);
+
+  /* ---- 间距（4px 栅格） ---- */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --space-12: 48px; --space-16: 64px; --space-20: 80px;
+
+  /* ---- 圆角 ---- */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  /* ---- 字体 ---- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-md: 17px;
+  --text-lg: 20px;
+  --text-xl: clamp(22px, 2.6vw, 26px);
+  --text-2xl: clamp(30px, 4vw, 42px);
+  --text-display: clamp(42px, 7.2vw, 80px);
+
+  /* ---- 动效 ---- */
+  --dur-fast: 160ms;
+  --dur-base: 280ms;
+  --dur-slow: 600ms;
+  --dur-breath: 5s;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  /* 弹性曲线（不支持 linear() 的浏览器用下面的回退值） */
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --ease-bounce: cubic-bezier(.34, 1.8, .64, 1);
+
+  /* ---- 层级 ---- */
+  --z-mesh: -3;
+  --z-scene: -2;
+  --z-nav: 50;
+  --z-grain: 100;
+
+  /* ---- 布局 ---- */
+  --container: 1040px;
+  --gutter: 16px;
+
+  color-scheme: light;
+}
+
+/* 手机 / 触屏：毛玻璃模糊半径减半，滚动更流畅（深浅色主题都不覆盖此变量） */
+@media (pointer: coarse), (max-width: 760px) {
+  :root { --glass-blur: blur(12px) saturate(160%); }
+}
+
+/* 真正的弹簧曲线（现代浏览器） */
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    --ease-spring: linear(0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.721 25.3%, 0.849 31.5%,
+      0.937 38.1%, 0.968 41.8%, 0.991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%, 1.001 85.9%, 1);
+    --ease-bounce: linear(0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%, 0.723 12.9%, 0.938 16.7%, 1.017,
+      1.077, 1.121, 1.149 24.3%, 1.159, 1.163, 1.161, 1.154 29.9%, 1.129 32.8%, 1.051 39.6%,
+      1.017 43.1%, 0.991, 0.977 51%, 0.974 53.8%, 0.975 57.1%, 0.997 69.8%, 1.003 76.9%, 1.004 83.8%, 1);
+  }
+}
+
+/* ---- 深色主题 ---- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #08090f; --color-surface: #13141d; --color-text: #ececf3;
+    --color-text-muted: #9c9db2; --color-text-faint: #85869e;
+    --color-border: rgba(255,255,255,.08); --color-hover: rgba(255,255,255,.07);
+    --color-brand-1: #818cf8; --color-brand-2: #c084fc; --color-brand-3: #f472b6;
+    --color-accent: #a5a1ff; --color-accent-soft: rgba(165,161,255,.13); --color-on-accent: #fff;
+    --glass-bg: rgba(22, 23, 34, .48); --glass-bg-strong: rgba(22, 23, 34, .72);
+    --glass-border: rgba(255,255,255,.09); --glass-highlight: inset 0 1px 0 rgba(255,255,255,.07);
+    --mesh-1: rgba(79,70,229,.32); --mesh-2: rgba(219,39,119,.16); --mesh-3: rgba(14,165,233,.14); --mesh-4: rgba(147,51,234,.22);
+    --grain-opacity: .08;
+    --shadow-xs: 0 1px 2px rgba(0,0,0,.4);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.3), 0 4px 12px -2px rgba(0,0,0,.4);
+    --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 12px 32px -8px rgba(0,0,0,.55);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.3), 0 28px 60px -16px rgba(0,0,0,.7);
+    --shadow-glow: 0 10px 34px -6px rgba(129,140,248,.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --color-bg: #08090f; --color-surface: #13141d; --color-text: #ececf3;
+  --color-text-muted: #9c9db2; --color-text-faint: #85869e;
+  --color-border: rgba(255,255,255,.08); --color-hover: rgba(255,255,255,.07);
+  --color-brand-1: #818cf8; --color-brand-2: #c084fc; --color-brand-3: #f472b6;
+  --color-accent: #a5a1ff; --color-accent-soft: rgba(165,161,255,.13); --color-on-accent: #fff;
+  --glass-bg: rgba(22, 23, 34, .48); --glass-bg-strong: rgba(22, 23, 34, .72);
+  --glass-border: rgba(255,255,255,.09); --glass-highlight: inset 0 1px 0 rgba(255,255,255,.07);
+  --mesh-1: rgba(79,70,229,.32); --mesh-2: rgba(219,39,119,.16); --mesh-3: rgba(14,165,233,.14); --mesh-4: rgba(147,51,234,.22);
+  --grain-opacity: .08;
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.3), 0 4px 12px -2px rgba(0,0,0,.4);
+  --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 12px 32px -8px rgba(0,0,0,.55);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.3), 0 28px 60px -16px rgba(0,0,0,.7);
+  --shadow-glow: 0 10px 34px -6px rgba(129,140,248,.5);
+  color-scheme: dark;
+}

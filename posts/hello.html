@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>你好，世界 · 贾涵翌</title>
+  <!-- ✏️ 写新文章时，改下面的描述、网址（文件名）和标题 -->
+  <meta name="description" content="我为什么要做一个属于自己的个人网站。" />
+  <link rel="canonical" href="https://jiahanyi1218.me/posts/hello.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="贾涵翌" />
+  <meta property="og:title" content="你好，世界：我为什么要做个人网站" />
+  <meta property="og:description" content="我为什么要做一个属于自己的个人网站。" />
+  <meta property="og:url" content="https://jiahanyi1218.me/posts/hello.html" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <script>document.documentElement.classList.remove('no-js');try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body>
+  <div class="bg-mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="container post">
+    <a class="link-back glass" href="../index.html#notes" data-reveal>
+      <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>返回随笔
+    </a>
+    <header class="section-head">
+      <p class="eyebrow" data-reveal>Note</p>
+      <h1 class="h2" data-reveal>你好，世界：我为什么要做个人网站</h1>
+      <p class="post__meta" data-reveal>2026-11-17 · 约 2 分钟</p>
+    </header>
+    <article class="prose glass" data-reveal>
+      <p>✏️ 这是一篇示例文章。想写新文章时，复制这个文件、改个文件名（比如 <code>posts/my-second-post.html</code>），再到首页「随笔」里加一条链接就行。</p>
+      <h3>为什么要有自己的网站</h3>
+      <ul>
+        <li>一个完全属于自己的角落，不受平台规则限制</li>
+        <li>集中展示作品和经历，比简历更生动</li>
+        <li>逼自己持续输出、记录成长</li>
+      </ul>
+      <blockquote>写下来的东西，才真正属于你。</blockquote>
+      <p>✏️ 接下来写写你的想法吧。</p>
+    </article>
+  </main>
+
+  <script>
+    // 文章页的渐入动画
+    (function () {
+      var items = document.querySelectorAll('[data-reveal]');
+      items.forEach(function (el, i) { el.style.setProperty('--i', i); });
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        items.forEach(function (el) { el.classList.add('is-in'); });
+      }); });
+    })();
+  </script>
+</body>
+</html>

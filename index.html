@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js" data-view="home">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>贾涵翌</title>
+  <meta name="description" content="你好，我是贾涵翌，一个平平无奇的大学生。" />
+  <link rel="canonical" href="https://jiahanyi1218.me/" />
+  <!-- 分享到社交平台时的预览信息 -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="贾涵翌" />
+  <meta property="og:title" content="贾涵翌" />
+  <meta property="og:description" content="你好，我是贾涵翌，一个平平无奇的大学生。" />
+  <meta property="og:url" content="https://jiahanyi1218.me/" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="theme-color" content="#f6f6fa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#08090f" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <!-- 先应用主题，避免页面闪烁 -->
+  <script>
+    document.documentElement.classList.remove('no-js');
+    try {
+      var t = localStorage.getItem('theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <!-- 背景层：渐变网格 → 3D 空间 → 颗粒纹理 -->
+  <div class="bg-mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <canvas class="scene" id="scene" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- 图标库：用 <svg class="icon"><use href="#i-xxx"/></svg> 引用 -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5M22 10v6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5A6 6 0 1 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6M10 22h4"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  </svg>
+
+  <header class="nav">
+    <div class="container nav__inner glass">
+      <a class="nav__logo" href="#home" aria-label="首页">
+        <span class="nav__mark">Jhy</span><span>贾涵翌</span>
+      </a>
+      <nav class="nav__links" aria-label="主导航">
+        <span class="nav__indicator" aria-hidden="true"></span>
+        <a class="nav__link" href="#about">关于</a>
+        <a class="nav__link" href="#projects">项目</a>
+        <a class="nav__link" href="#notes">随笔</a>
+        <a class="nav__link" href="#contact">联系</a>
+      </nav>
+      <button class="btn btn--icon btn--glass btn--sm theme-toggle" id="themeBtn" type="button" aria-label="切换深浅色">
+        <svg class="icon icon--sm icon-sun"><use href="#i-sun"/></svg>
+        <svg class="icon icon--sm icon-moon"><use href="#i-moon"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <!-- ========== 首页 ========== -->
+    <section class="view home" id="home">
+      <div class="home__content">
+        <span class="badge glass" data-reveal><i class="badge__dot"></i>台湾大学 · 在读</span>
+        <h1 class="display home__title" data-reveal>你好，我是<br /><span class="text-gradient">贾涵翌</span></h1>
+        <p class="lead" data-reveal>一个平平无奇的大学生。</p>
+        <div class="cluster home__actions" data-reveal>
+          <a class="btn btn--primary btn--lg" href="#about" data-magnetic>认识我 <svg class="icon icon--move"><use href="#i-arrow-right"/></svg></a>
+          <a class="btn btn--glass btn--lg" href="#projects" data-magnetic>看看项目</a>
+        </div>
+        <p class="home__hint" data-reveal><i></i>移动鼠标 · 点击空白处 与 3D 互动</p>
+      </div>
+    </section>
+
+    <!-- ========== 关于 ========== -->
+    <section class="view" id="about" hidden>
+      <header class="section-head">
+        <p class="eyebrow" data-reveal>About</p>
+        <h2 class="h2" data-reveal>关于我</h2>
+      </header>
+      <div class="about">
+        <div class="about__text">
+          <p data-reveal>你好，我是贾涵翌，目前在台湾大学读书。</p>
+          <p data-reveal>平时喜欢动手折腾：写写代码、玩玩单片机，把脑子里的想法变成能跑起来的东西。这个网站是我的一个小角落，用来记录学到的东西、做过的项目和一些零碎的想法。</p>
+          <div class="about__facts glass" data-reveal>
+            <div class="info-item">
+              <span class="info-item__icon"><svg class="icon"><use href="#i-cap"/></svg></span>
+              <div><span class="info-item__label">学校</span><span class="info-item__value">台湾大学</span></div>
+            </div>
+            <div class="info-item">
+              <span class="info-item__icon"><svg class="icon"><use href="#i-pin"/></svg></span>
+              <div><span class="info-item__label">所在地</span><span class="info-item__value">台北</span></div>
+            </div>
+            <div class="info-item">
+              <span class="info-item__icon"><svg class="icon"><use href="#i-bulb"/></svg></span>
+              <div><span class="info-item__label">正在学习</span><span class="info-item__value">嵌入式开发、网页制作</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="about__skills glass" data-reveal>
+          <p class="eyebrow">Skills</p>
+          <div class="cluster" style="--cluster-gap: 8px">
+            <span class="chip">C 语言</span><span class="chip">单片机 / 嵌入式</span><span class="chip">Python</span>
+            <span class="chip">HTML / CSS</span><span class="chip">JavaScript</span><span class="chip">Three.js</span><span class="chip">Git</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 项目 ========== -->
+    <section class="view" id="projects" hidden>
+      <header class="section-head">
+        <p class="eyebrow" data-reveal>Projects</p>
+        <h2 class="h2" data-reveal>项目</h2>
+        <p class="section-head__desc" data-reveal>做过的一些东西，点开看看细节。</p>
+      </header>
+      <div class="grid-auto">
+        <!-- ✏️ 新增项目：复制一个 <article>，再在下面复制一个详情页 <section>，两者的编号对应 -->
+        <article class="card card--interactive glass" data-reveal data-tilt>
+          <div class="card__top"><span class="card__index">01</span><span class="card__arrow"><svg class="icon icon--sm"><use href="#i-arrow-up-right"/></svg></span></div>
+          <h3 class="h3 card__title">项目名称一</h3>
+          <p class="card__desc">一句话描述这个项目解决了什么问题、用了什么技术。</p>
+          <div class="card__tags"><span class="tag">Python</span><span class="tag">数据</span></div>
+          <a class="card__link" href="#project-1" aria-label="查看 项目名称一"></a>
+        </article>
+        <article class="card card--interactive glass" data-reveal data-tilt>
+          <div class="card__top"><span class="card__index">02</span><span class="card__arrow"><svg class="icon icon--sm"><use href="#i-arrow-up-right"/></svg></span></div>
+          <h3 class="h3 card__title">项目名称二</h3>
+          <p class="card__desc">一句话描述这个项目解决了什么问题、用了什么技术。</p>
+          <div class="card__tags"><span class="tag">嵌入式</span><span class="tag">C</span></div>
+          <a class="card__link" href="#project-2" aria-label="查看 项目名称二"></a>
+        </article>
+        <article class="card card--interactive glass" data-reveal data-tilt>
+          <div class="card__top"><span class="card__index">03</span><span class="card__arrow"><svg class="icon icon--sm"><use href="#i-arrow-up-right"/></svg></span></div>
+          <h3 class="h3 card__title">这个网站</h3>
+          <p class="card__desc">毛玻璃材质、弹性动效和 Three.js 3D 空间，纯手写无框架。</p>
+          <div class="card__tags"><span class="tag">Three.js</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          <a class="card__link" href="#project-3" aria-label="查看 这个网站"></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== 项目详情页（点卡片后在本页显示） ========== -->
+    <section class="view detail" id="project-1" data-parent="projects" hidden>
+      <a class="link-back glass" href="#projects" data-reveal><svg class="icon icon--sm"><use href="#i-arrow-left"/></svg>返回项目</a>
+      <header class="section-head">
+        <p class="eyebrow" data-reveal>Project 01</p>
+        <h2 class="h2" data-reveal>项目名称一</h2>
+        <div class="cluster" data-reveal><span class="tag">Python</span><span class="tag">数据</span></div>
+      </header>
+      <article class="prose glass" data-reveal>
+        <p>✏️ 项目简介：这个项目是做什么的，为什么要做它。</p>
+        <h3>做了什么</h3>
+        <ul>
+          <li>✏️ 功能或亮点一</li>
+          <li>✏️ 功能或亮点二</li>
+        </ul>
+        <h3>收获</h3>
+        <p>✏️ 遇到了什么困难，怎么解决的，学到了什么。</p>
+      </article>
+    </section>
+
+    <section class="view detail" id="project-2" data-parent="projects" hidden>
+      <a class="link-back glass" href="#projects" data-reveal><svg class="icon icon--sm"><use href="#i-arrow-left"/></svg>返回项目</a>
+      <header class="section-head">
+        <p class="eyebrow" data-reveal>Project 02</p>
+        <h2 class="h2" data-reveal>项目名称二</h2>
+        <div class="cluster" data-reveal><span class="tag">嵌入式</span><span class="tag">C</span></div>
+      </header>
+      <article class="prose glass" data-reveal>
+        <p>✏️ 项目简介：这个项目是做什么的，为什么要做它。</p>
+        <h3>做了什么</h3>
+        <ul>
+          <li>✏️ 功能或亮点一</li>
+          <li>✏️ 功能或亮点二</li>
+        </ul>
+        <h3>收获</h3>
+        <p>✏️ 遇到了什么困难，怎么解决的，学到了什么。</p>
+      </article>
+    </section>
+
+    <section class="view detail" id="project-3" data-parent="projects" hidden>
+      <a class="link-back glass" href="#projects" data-reveal><svg class="icon icon--sm"><use href="#i-arrow-left"/></svg>返回项目</a>
+      <header class="section-head">
+        <p class="eyebrow" data-reveal>Project 03</p>
+        <h2 class="h2" data-reveal>这个网站</h2>
+        <div class="cluster" data-reveal><span class="tag">Three.js</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      </header>
+      <article class="prose glass" data-reveal>
+        <p>这是我的个人网站，用纯 HTML、CSS 和 JavaScript 手写，没有使用任何框架；3D 部分用 Three.js 实现，所有资源都放在本地。</p>
+        <h3>视觉</h3>
+        <ul>
+          <li>毛玻璃材质、柔和分层阴影、缓慢漂移的渐变网格，以及一层颗粒纹理</li>
+          <li>首页是一个会“呼吸”的 3D 流体球，跟随鼠标转动，点击会泛起波动</li>
+        </ul>
+        <h3>交互</h3>
+        <ul>
+          <li>弹性曲线驱动的按钮、导航指示块和卡片倾斜</li>
+          <li>内容随滚动依次渐入；页面切换都在同一个标签页内完成</li>
+        </ul>
+        <h3>工程</h3>
+        <ul>
+          <li>Design Tokens + 标准化组件，详见 <a href="components.html" style="color: var(--color-accent)">组件库</a></li>
+          <li>支持深色 / 浅色模式、手机浏览，以及“减少动画”的系统设置</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- ========== 随笔 ========== -->
+    <section class="view" id="notes" hidden>
+      <header class="section-head">
+        <p class="eyebrow" data-reveal>Notes</p>
+        <h2 class="h2" data-reveal>随笔</h2>
+        <p class="section-head__desc" data-reveal>记录学到的东西和一些零碎的想法。</p>
+      </header>
+      <ul class="list glass" data-reveal>
+        <li>
+          <a class="list-item" href="posts/hello.html">
+            <time class="list-item__meta">2026-11-17</time>
+            <span class="list-item__title">你好，世界：我为什么要做个人网站</span>
+            <svg class="icon"><use href="#i-arrow-right"/></svg>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ========== 联系 ========== -->
+    <section class="view" id="contact" hidden>
+      <div class="contact glass" data-reveal>
+        <div class="contact__icon"><svg class="icon icon--lg"><use href="#i-mail"/></svg></div>
+        <p class="eyebrow">Contact</p>
+        <h2 class="h2">一起聊聊？</h2>
+        <p class="contact__desc">无论是合作、交流还是单纯打个招呼，都欢迎给我写信。</p>
+        <!-- ✏️ 邮箱倒序写在 data-email 里，防止被爬虫抓取；页面加载后由 js/main.js 还原 -->
+        <div class="contact__email" id="email" data-email="moc.liamg@81216002yhj">jhy20061218 [at] gmail [dot] com</div>
+        <div class="cluster">
+          <a class="btn btn--primary" id="mailBtn" href="#contact" data-magnetic><svg class="icon icon--sm"><use href="#i-mail"/></svg>发邮件</a>
+          <button class="btn btn--glass" type="button" id="copyBtn" data-magnetic>
+            <svg class="icon icon--sm"><use href="#i-copy"/></svg><span>复制邮箱</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year">2026</span> 贾涵翌</p>
+      <a href="components.html">组件库</a>
+      <!-- 如果用国内服务器，备案号放这里：<a href="https://beian.miit.gov.cn/">X ICP备XXXXXXXX号</a> -->
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script type="module" src="js/scene.js"></script>
+</body>
+</html>
