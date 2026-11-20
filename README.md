@@ -12,10 +12,13 @@ css/tokens.css          设计变量：颜色、材质、阴影、间距、圆�
 css/base.css            重置、背景材质（渐变网格 / 颗粒纹理）、排版、滚动渐入
 css/components.css      标准化组件：按钮、卡片、标签、导航、列表……
 css/layout.css          各页面的布局
+js/theme-init.js        最先运行：应用主题、防 iframe 嵌套
 js/main.js              主题切换、页内路由、滚动渐入、微交互（磁吸、涟漪、倾斜）
 js/scene.js             Three.js 3D 场景
 js/vendor/three.module.min.js   Three.js r160（MIT 协议，已放在本地，不依赖 CDN）
 favicon.svg             浏览器标签页图标
+diary/src/*.md          日记源文件（Markdown）
+tools/build-diary.mjs   日记生成器
 ```
 
 ## 修改内容
@@ -98,6 +101,44 @@ git add .
 git commit -m "写一句说明改了什么"
 git push
 ```
+
+## 写日记
+
+日记是公开的，源文件是 Markdown，放在 `diary/src/`，文件名就是日期：
+
+```
+diary/src/2026-11-22.md      （同一天第二篇：2026-11-22-2.md）
+```
+
+文件开头可以写标题、天气、心情（都可以省略），下面是正文：
+
+```markdown
+---
+title: 今天的标题
+weather: 晴
+mood: 😊
+---
+正文。支持 **粗体**、*斜体*、[链接](https://example.com)、- 列表、> 引用、## 小标题。
+图片放进 diary/img/，然后写 ![说明](img/照片.jpg)
+```
+
+写好后生成页面并发布：
+
+```bash
+node tools/build-diary.mjs
+git add .
+git commit -m "日记 2026-11-22"
+git push
+```
+
+生成器会更新 `diary/日期.html`、日记首页 `diary/index.html` 和 `sitemap.xml`。正文里的 HTML 会被当成普通文字显示，不会执行。
+
+## 安全措施
+
+- 所有页面都有 Content-Security-Policy：只允许加载本站自己的脚本，页面里不能写内联 `<script>`（需要脚本就放进 `js/` 再引用）
+- `js/theme-init.js` 会阻止别的网站用 iframe 套住本站（防点击劫持）
+- 邮箱在源码里倒序存放，防爬虫
+- Three.js 放在本地，不依赖外部 CDN
 
 ## 写新文章
 

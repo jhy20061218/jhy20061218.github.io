@@ -128,8 +128,6 @@ function init() {
   rig.add(spinner); scene.add(rig);
 
   const blobMat = makeBlobMaterial(0.17, 0.75);
-  // 调试用：控制台里可查看 window.__scene
-  window.__scene = { state: null, target: null };
   const blob = new THREE.Mesh(new THREE.IcosahedronGeometry(1.35, lowPower ? 24 : 48), blobMat);
   spinner.add(blob);
 
@@ -194,7 +192,6 @@ function init() {
 
   // ---------- 布局：根据页面和屏幕决定球的位置（弹簧过渡） ----------
   const state = { x: 0, y: 0, s: 0.2 }, vel = { x: 0, y: 0, s: 0 }, target = { x: 0, y: 0, s: 1 };
-  window.__scene.state = state; window.__scene.target = target;
   function visible() {
     const h = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
     return { w: h * camera.aspect, h };

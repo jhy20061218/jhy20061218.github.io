@@ -2,6 +2,8 @@
 <html lang="zh-CN" class="no-js" data-view="home">
 <head>
   <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>贾涵翌</title>
   <meta name="description" content="你好，我是贾涵翌，一个平平无奇的大学生。" />
@@ -21,14 +23,7 @@
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/layout.css" />
-  <!-- 先应用主题，避免页面闪烁 -->
-  <script>
-    document.documentElement.classList.remove('no-js');
-    try {
-      var t = localStorage.getItem('theme');
-      if (t) document.documentElement.setAttribute('data-theme', t);
-    } catch (e) {}
-  </script>
+  <script src="js/theme-init.js"></script>
 </head>
 <body>
   <!-- 背景层：渐变网格 → 3D 空间 → 颗粒纹理 -->
@@ -61,6 +56,7 @@
         <a class="nav__link" href="#about">关于</a>
         <a class="nav__link" href="#projects">项目</a>
         <a class="nav__link" href="#notes">随笔</a>
+        <a class="nav__link" href="diary/">日记</a>
         <a class="nav__link" href="#contact">联系</a>
       </nav>
       <button class="btn btn--icon btn--glass btn--sm theme-toggle" id="themeBtn" type="button" aria-label="切换深浅色">

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 新增文章时，在这里复制一个 <url> 并改地址和日期 -->
+<!-- 由 tools/build-diary.mjs 自动生成，请不要手动修改 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://jiahanyi1218.me/</loc><lastmod>2026-11-21</lastmod></url>
   <url><loc>https://jiahanyi1218.me/posts/hello.html</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://jiahanyi1218.me/diary/</loc><lastmod>2026-11-21</lastmod></url>
 </urlset>
