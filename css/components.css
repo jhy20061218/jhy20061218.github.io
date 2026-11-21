@@ -225,9 +225,10 @@
   transition: transform 600ms var(--ease-bounce);
 }
 .nav__logo:hover .nav__mark { transform: rotate(-6deg) scale(1.06); }
-.nav__links { position: relative; display: flex; gap: 2px; margin-left: auto; }
+.nav__links { position: relative; display: flex; gap: 2px; margin-left: auto; min-width: 0; }
+.nav__logo, .nav .theme-toggle { flex-shrink: 0; }
 .nav__link {
-  position: relative; z-index: 1; padding: 8px 15px; border-radius: var(--radius-full);
+  position: relative; z-index: 1; padding: 8px 15px; border-radius: var(--radius-full); white-space: nowrap;
   color: var(--color-text-muted); font-size: 15px; transition: color var(--dur-base);
 }
 .nav__link:hover, .nav__link.is-active { color: var(--color-text); }
@@ -283,4 +284,9 @@ textarea.field__input { min-height: 132px; resize: vertical; line-height: 1.7; }
   .list-item { grid-template-columns: 1fr auto; gap: 2px var(--space-3); padding: var(--space-4); }
   .list-item__meta { grid-column: 1 / -1; }
 }
-@media (max-width: 380px) { .nav__link { padding: 7px 7px; } }
+/* 窄屏：6 个导航项要挤得下；再窄就允许横向滑动，绝不换行 */
+@media (max-width: 420px) {
+  .nav__link { padding: 7px 5px; font-size: 13px; }
+  .nav__links { gap: 0; overflow-x: auto; scrollbar-width: none; }
+  .nav__links::-webkit-scrollbar { display: none; }
+}
