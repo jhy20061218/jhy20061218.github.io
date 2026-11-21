@@ -268,6 +268,7 @@ function sitemap(all) {
   });
   urls.push([`${SITE}/diary/`, all.length ? all[all.length - 1].date : today]);
   all.forEach((e) => urls.push([`${SITE}/diary/${e.slug}.html`, e.date]));
+  if (fs.existsSync(path.join(ROOT, 'guestbook', 'index.html'))) urls.push([`${SITE}/guestbook/`]);
   return `<?xml version="1.0" encoding="UTF-8"?>
 <!-- 由 tools/build-diary.mjs 自动生成，请不要手动修改 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

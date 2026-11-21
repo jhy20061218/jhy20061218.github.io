@@ -257,6 +257,22 @@
 .footer a { transition: color var(--dur-fast); }
 .footer a:hover { color: var(--color-accent); }
 
+/* ---------- Field 表单输入框 ---------- */
+.field { display: grid; gap: 6px; }
+.field__label { font-size: var(--text-sm); font-weight: 600; }
+.field__label small { margin-left: 6px; font-weight: 400; color: var(--color-text-faint); }
+.field__input {
+  width: 100%; padding: 11px 14px; border-radius: var(--radius-md);
+  font: inherit; font-size: var(--text-base); color: var(--color-text);
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.field__input::placeholder { color: var(--color-text-faint); }
+.field__input:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-soft); }
+textarea.field__input { min-height: 132px; resize: vertical; line-height: 1.7; }
+.field__hint { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-faint); text-align: right; }
+.field__hint.is-over { color: #e5484d; }
+
 /* ---------- 手机适配 ---------- */
 @media (max-width: 760px) {
   .nav { padding-top: 10px; }

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <!-- 留言箱需要连 Cloudflare：connect-src 加上后端地址，script/frame-src 允许 Turnstile 人机验证 -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://guestbook.jhy20061218.workers.dev; object-src 'none'; base-uri 'self'; form-action 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>留言箱 · 贾涵翌</title>
+  <meta name="description" content="给贾涵翌留句话吧，匿名也可以。" />
+  <link rel="canonical" href="https://jiahanyi1218.me/guestbook/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="贾涵翌" />
+  <meta property="og:title" content="留言箱 · 贾涵翌" />
+  <meta property="og:description" content="给贾涵翌留句话吧，匿名也可以。" />
+  <meta property="og:url" content="https://jiahanyi1218.me/guestbook/" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <script src="../js/theme-init.js"></script>
+</head>
+<body>
+  <div class="bg-mesh" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  </svg>
+
+  <main class="container post gb">
+    <div class="cluster post__bar">
+      <a class="link-back glass" href="../"><svg class="icon icon--sm"><use href="#i-arrow-left"/></svg>返回主页</a>
+      <button class="btn btn--icon btn--glass btn--sm theme-toggle" id="themeBtn" type="button" aria-label="切换深浅色">
+        <svg class="icon icon--sm icon-sun"><use href="#i-sun"/></svg>
+        <svg class="icon icon--sm icon-moon"><use href="#i-moon"/></svg>
+      </button>
+    </div>
+
+    <header class="section-head">
+      <p class="eyebrow" data-reveal>Guestbook</p>
+      <h1 class="h2" data-reveal>留言箱</h1>
+      <p class="section-head__desc" data-reveal>想说什么都可以，不用留真名。留言我看过之后才会公开显示。</p>
+    </header>
+
+    <!-- ✏️ data-api：后端地址；data-sitekey：Turnstile 的 Site Key（公开的，不是密钥） -->
+    <form class="gb-form glass" id="gbForm" data-api="https://guestbook.jhy20061218.workers.dev" data-sitekey="0x4AAAAAAGLN6CQODc-UrzgZ" novalidate data-reveal>
+      <label class="field">
+        <span class="field__label">昵称<small>可不填，默认“匿名”</small></span>
+        <input class="field__input" name="name" type="text" maxlength="20" autocomplete="nickname" placeholder="匿名" />
+      </label>
+      <label class="field">
+        <span class="field__label">留言</span>
+        <textarea class="field__input" name="content" maxlength="500" required placeholder="写点什么吧……"></textarea>
+        <span class="field__hint" id="gbCount" aria-live="polite">0 / 500</span>
+      </label>
+      <div class="gb-form__captcha" id="gbCaptcha"></div>
+      <div class="gb-form__foot">
+        <p class="gb-status" id="gbStatus" role="status" aria-live="polite"></p>
+        <button class="btn btn--primary" type="submit" id="gbSubmit">
+          <svg class="icon icon--sm"><use href="#i-send"/></svg>发送留言
+        </button>
+      </div>
+    </form>
+
+    <div class="gb-head">
+      <h2 class="h3">大家的留言</h2>
+      <span id="gbTotal"></span>
+    </div>
+    <ul class="gb-list" id="gbList" aria-live="polite"></ul>
+    <p class="gb-empty glass" id="gbEmpty" hidden>还没有公开的留言，来当第一个吧。</p>
+    <div class="gb-more"><button class="btn btn--glass" type="button" id="gbMore" hidden>加载更多</button></div>
+  </main>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/guestbook.js"></script>
+</body>
+</html>

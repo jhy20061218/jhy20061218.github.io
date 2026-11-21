@@ -1,0 +1,20 @@
+# 留言箱后端（Cloudflare Workers + D1）
+name = "guestbook"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+workers_dev = true
+account_id = "1957476806fe426429803b4d7366f91b"
+
+[vars]
+# 允许调用接口的网页来源（逗号分隔）
+ALLOWED_ORIGINS = "https://jiahanyi1218.me,https://www.jiahanyi1218.me"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "guestbook"
+database_id = "880c33e2-fe17-4279-936e-007ce98fea3d"
+
+# 以下为密钥，不写在这里，用命令设置：
+#   npx wrangler secret put TURNSTILE_SECRET   # Turnstile 人机验证的 Secret Key
+#   npx wrangler secret put ADMIN_TOKEN        # 管理后台密码（自己定，越长越好）
+#   npx wrangler secret put IP_SALT            # 随便一串随机字符，用于给 IP 加盐哈希

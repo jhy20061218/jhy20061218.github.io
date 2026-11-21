@@ -1,0 +1,5 @@
+# 本地开发用（复制为 .dev.vars）。下面是 Cloudflare 官方的“永远通过”测试密钥
+TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+ADMIN_TOKEN=local-dev-admin-token-change-me
+IP_SALT=local-dev-salt
+ALLOWED_ORIGINS=http://localhost:5510,http://127.0.0.1:5510

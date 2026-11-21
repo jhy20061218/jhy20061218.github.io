@@ -19,6 +19,10 @@ js/vendor/three.module.min.js   Three.js r160（MIT 协议，已放在本地，�
 favicon.svg             浏览器标签页图标
 diary/src/*.md          日记源文件（Markdown）
 tools/build-diary.mjs   日记生成器
+guestbook/index.html    留言箱（公开页面）
+guestbook/admin.html    留言管理（审核 / 回复 / 删除）
+js/guestbook*.js        留言箱前端脚本
+guestbook-worker/       留言箱后端：Cloudflare Worker + D1 数据库
 ```
 
 ## 修改内容
@@ -133,12 +137,32 @@ git push
 
 生成器会更新 `diary/日期.html`、日记首页 `diary/index.html` 和 `sitemap.xml`。正文里的 HTML 会被当成普通文字显示，不会执行。
 
+## 留言箱
+
+前端在 `guestbook/`，后端在 `guestbook-worker/`（Cloudflare Workers 免费版 + D1 数据库）。
+
+- 任何人都能匿名留言，但要先通过 Cloudflare Turnstile 人机验证
+- 新留言默认**不公开**，在 `https://jiahanyi1218.me/guestbook/admin.html` 输入管理密码后审核
+- 每个 IP 10 分钟最多 3 条；待审核超过 300 条时暂停接收
+- 数据库里不存原始 IP，只存加盐哈希（用于限流）
+- 留言一律当纯文本显示，不会被当成 HTML 执行
+
+后端地址和 Turnstile Site Key 写在 `guestbook/index.html`、`guestbook/admin.html` 的 `data-api` / `data-sitekey` 和 CSP 的 `connect-src` 里，换地址时这几处要一起改。
+
+后端更新：
+
+```bash
+cd guestbook-worker
+npx wrangler deploy
+```
+
 ## 安全措施
 
 - 所有页面都有 Content-Security-Policy：只允许加载本站自己的脚本，页面里不能写内联 `<script>`（需要脚本就放进 `js/` 再引用）
 - `js/theme-init.js` 会阻止别的网站用 iframe 套住本站（防点击劫持）
 - 邮箱在源码里倒序存放，防爬虫
 - Three.js 放在本地，不依赖外部 CDN
+- 留言箱页面额外只放行 Cloudflare Turnstile 和留言后端这两个外部地址
 
 ## 写新文章
 
